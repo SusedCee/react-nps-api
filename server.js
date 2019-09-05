@@ -9,7 +9,7 @@ require('./db/db');
 app.use(session({
 	secret: 'stinky scratcher',
 	resave: false,
-	saveUnitialized: false
+	saveUninitialized: false
 }));
 
 //SET UP CORS AS MIDDLEWARE, so any client can make a request to our server
