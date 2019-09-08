@@ -3,11 +3,81 @@ const router = express.Router();
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
+//GET ALL USERS
+// require Our Model - Remember Model is
+// a representation of our data
+// The model should be capitalized
+// const users = require('../models/user');
+// Creating the index route
+// index route should show all the users
+ router.get('/', async (req, res, next) => {
+  // req.body this is from the fetch request
+  console.log(req.body, ' this is get all')
+     try  {
+      const allUsers = await User.find();
+      console.log(req.session, ' this is req.session')
+      // This is the response to react
+      res.json({
+        code: 200,
+        message: "Success", // everything worked on the server http codes
+        data: allUsers
+      });
+
+    } catch (err){
+
+      res.send(err)
+
+    }
+});
+
+
+//GET ONE USER
+router.get('/:id', async (req, res, next) => {
+
+
+     try  {
+
+        const foundUser = await User.findById(req.params.id);
+        res.json({
+          status: {
+            code: 200,
+            message: "Success"
+          },
+          data: foundUser
+        });
+
+      } catch (err){
+        res.send(err);
+      }
+});
+
+//EDIT ONE USER
+router.put('/:id', async (req, res) => {
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    res.json({
+      status: {
+            code: 200,
+            message: "resource updated successfully"
+          },
+      data: updatedUser
+    });
+  } catch(err){
+    res.send(err)
+  }
+});
+
+
+
+
+//LOGIN ROUTE
 router.post('/login', async (req, res) => {
 
 	//First query the database to see if the user exists
 	try {
 
+		console.log("trying to find user: " + req.body.username);
 		const foundUser = await User.findOne({username: req.body.username});
 		console.log(foundUser, 'foundUser');
 
@@ -17,14 +87,15 @@ router.post('/login', async (req, res) => {
 			if(bcrypt.compareSync(req.body.password, foundUser.password)){
 				//if valid, we'll set the session
 				req.session.userId = foundUser._id;
-				req.session.username = froundUser.username;
+				req.session.username = foundUser.username;
 				req.session.logged = true;
-
+				console.log("successfully logged in");
 				res.json({
 					status: {
 						code: 200, 
 						message: "User Logged In"
-					}
+					},
+					data: foundUser
 				})
 
 			} else {
@@ -34,7 +105,7 @@ router.post('/login', async (req, res) => {
 				res.json({
 					status: {
 					code: 200,
-					message: "Username or Password is incorrect"
+					message: "Password is incorrect"
 				}
 			})
 		}
@@ -47,7 +118,7 @@ router.post('/login', async (req, res) => {
 		res.json({
 			status: {
 				code: 200,
-				message: "Username or Password is incorrect"
+				message: "Username is incorrect"
 			}
 		})
 	}
@@ -102,23 +173,21 @@ router.get('/logout', async (req, res) => {
 
 
 
-// router.get('/logout', (req, res) => {
+// DELETE ROUTE
+router.delete('/:id', async (req, res) => {
 
-//   req.session.destroy((err) => {
-//     if(err){
-//       res.send(err);
-//     } else {
-//       res.json({
-//         status:  {
-//             code: 200,
-//             message: "User Logged Out"
-//           }
-//       })
-//       // back to the homepage
-//     }
-//   })
-
-// })
+  try {
+     const deletedUser = await User.findByIdAndRemove(req.params.id);
+      res.json({
+        status: {
+            code: 200,
+            message: "resource deleted successfully"
+          }
+      });
+  } catch(err){
+    res.send(err);
+  }
+});
 
 
 module.exports = router;

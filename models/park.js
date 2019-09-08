@@ -11,3 +11,7 @@ const ParkSchema = new mongoose.Schema({
 //Exporting the whole park array
 //and it will be names whatever we require as
 module.exports = mongoose.model('Park', ParkSchema);
+
+
+
+//MIGHT NOT EVEN NEED THIS MODEL

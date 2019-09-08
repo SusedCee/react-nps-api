@@ -30,6 +30,7 @@ const authController = require('./controllers/authController');
 const favoriteController = require('./controllers/favoriteController');
 const parkController = require('./controllers/parkController');
 
+
 app.use('/api/v1/favorite', favoriteController);
 app.use('/auth', authController);
 app.use('/api/v1/park', parkController);

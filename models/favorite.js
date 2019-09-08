@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 
 const FavoriteSchema = new mongoose.Schema({
-	parks: [],
+	park: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Park'
+	},
 	notes: String,
-	img: {data: Buffer, contentType: String}
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	}
 });
 
 //Exporting the whole favorite array
