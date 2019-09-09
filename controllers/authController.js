@@ -174,10 +174,10 @@ router.get('/logout', async (req, res) => {
 
 
 // DELETE ROUTE
-router.delete('/:id', async (req, res) => {
+router.delete('/:_id', async (req, res) => {
 
   try {
-     const deletedUser = await User.findByIdAndRemove(req.params.id);
+     const deletedUser = await User.findByIdAndRemove(req.params._id);
       res.json({
         status: {
             code: 200,
