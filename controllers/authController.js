@@ -52,17 +52,38 @@ router.get('/:id', async (req, res, next) => {
 });
 
 //EDIT ONE USER
-router.put('/:id', async (req, res) => {
+router.put('/:id', (req, res) => {
+
 
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
-    res.json({
-      status: {
-            code: 200,
-            message: "resource updated successfully"
-          },
-      data: updatedUser
+    console.log("updating a user with new firstname: " + req.body.firstname);
+    //const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body);
+    //console.log("new firstname: " + await updatedUser.firstname)
+    User.findById(req.params.id, (err, foundUser) =>
+    {
+    	if (err)
+    	{
+    		console.log(err);
+    	}
+    	else
+    	{
+    		foundUser.username = req.body.username;
+    		foundUser.firstname = req.body.firstname;
+    		foundUser.lastname = req.body.lastname;
+    		foundUser.email = req.body.email;
+    		//foundUser.password = req.body.password;
+    		foundUser.save();
+    		console.log("done");
+    		res.json({
+		      status: {
+		            code: 200,
+		            message: "resource updated successfully"
+		          },
+		      data: foundUser
+		    });
+    	}
     });
+    
   } catch(err){
     res.send(err)
   }
