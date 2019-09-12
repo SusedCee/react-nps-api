@@ -1,5 +1,7 @@
 //This is where we will set up our db connection
 const mongoose = require('mongoose');
+//updating app for heroku
+const connectionString = process.env.MONGODB_URI;
 
 //parks is the name of our database
 //that is automatically created 

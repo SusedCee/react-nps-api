@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config()
 const session = require('express-session');
+
 
 require('./db/db');
 
@@ -35,7 +37,7 @@ app.use('/api/v1/favorite', favoriteController);
 app.use('/auth', authController);
 app.use('/api/v1/park', parkController);
 
-app.listen(process.env.PORT || 9000, () => {
+app.listen(process.env.PORT, () => {
 	console.log('listening on port 9000');
 });
 
