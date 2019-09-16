@@ -38,6 +38,11 @@ app.use('/api/v1/favorite', favoriteController);
 app.use('/auth', authController);
 app.use('/api/v1/park', parkController);
 
+app.get('/', async (req.res) => {
+	res.send("Hi")
+}
+
+
 app.listen(process.env.PORT, () => {
 	console.log('listening on port 9000');
 });
