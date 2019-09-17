@@ -5,11 +5,11 @@ const connectionString = process.env.MONGODB_URI;
 
 //parks is the name of our database
 //that is automatically created 
-mongoose.connect('mongodb://localhost/parks', {
-	useNewUrlParser: true,
-	useCreateIndex: true,
-	useFindModify: false
-});
+// mongoose.connect('mongodb://localhost/parks', {
+// 	useNewUrlParser: true,
+// 	useCreateIndex: true,
+// 	useFindModify: false
+// });
 
 mongoose.connection.on('connected', () => {
 	console.log('Mongoose is connected')
