@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const session = require('express-session');
 
 
@@ -14,6 +13,9 @@ app.use(session({
 	resave: false,
 	saveUninitialized: false
 }));
+
+
+
 
 //SET UP CORS AS MIDDLEWARE, so any client can make a request to our server
 app.use(bodyParser.urlencoded({extended: false}));
@@ -43,13 +45,7 @@ app.use('/api/v1/park', parkController);
 // }
 
 
-app.listen(process.env.PORT || 9000 () => {
+app.listen(process.env.PORT, () => {
 	console.log('listening on port 9000');
 });
-
-
-
-
-
-
 
