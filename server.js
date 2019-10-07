@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const corsOptions = {
-	origin: 'http://localhost:3000', // when you deploy your react app, this is where you put the address,
+	origin: 'http://npsearch.herokuapp.com', // when you deploy your react app, this is where you put the address,
 	credentials: true, // allowing cookies to be sent with requests from the client (session cookie),
 	optionSuccessStatus: 200 // some legacy browsers IE11 choke on a 204, and options requests
 }

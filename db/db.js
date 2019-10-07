@@ -1,15 +1,19 @@
 //This is where we will set up our db connection
 const mongoose = require('mongoose');
+
+console.log(process.env.MONGODB_URI)
+
 //updating app for heroku
-const connectionString = process.env.MONGODB_URI;
+// const connectionString = process.env.MONGODB_URI;
 
 //parks is the name of our database
 //that is automatically created 
-// mongoose.connect('mongodb://localhost/parks', {
-// 	useNewUrlParser: true,
-// 	useCreateIndex: true,
-// 	useFindModify: false
-// });
+// This is what I took off where it now says process.env.MONGO_URI
+mongoose.connect(process.env.MONGODB_URI, {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useFindModify: false
+});
 
 mongoose.connection.on('connected', () => {
 	console.log('Mongoose is connected')
