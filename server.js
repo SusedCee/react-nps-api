@@ -14,21 +14,13 @@ app.use(session({
 	saveUninitialized: false
 }));
 
-app.use(function (req, res, next) {
-	console.log(req.session)
-    res.locals.currentUser = req.sessionStore.sessions.userId;
-    currentSessionUser = res.locals.currentUser;
-    console.log(currentSessionUser)
-    next();
-});
-
 
 //SET UP CORS AS MIDDLEWARE, so any client can make a request to our server
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const corsOptions = {
-	origin: 'http://npsearch.herokuapp.com', // when you deploy your react app, this is where you put the address,
+	origin: 'https://npsearch.herokuapp.com', // when you deploy your react app, this is where you put the address,
 	credentials: true, // allowing cookies to be sent with requests from the client (session cookie),
 	optionSuccessStatus: 200 // some legacy browsers IE11 choke on a 204, and options requests
 }
