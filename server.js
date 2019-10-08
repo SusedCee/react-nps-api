@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const corsOptions = {
-	origin: 'https://npsearch.herokuapp.com', // when you deploy your react app, this is where you put the address,
+	origin: 'http://npsearch.herokuapp.com', // when you deploy your react app, this is where you put the address,
 	credentials: true, // allowing cookies to be sent with requests from the client (session cookie),
 	optionSuccessStatus: 200 // some legacy browsers IE11 choke on a 204, and options requests
 }
@@ -38,9 +38,9 @@ app.use('/api/v1/favorite', favoriteController);
 app.use('/auth', authController);
 app.use('/api/v1/park', parkController);
 
-const port = process.env.port || 9000;
 
-app.listen(port, () => {
+
+app.listen(process.env.PORT, () => {
 	console.log('listening on port 9000');
 });
 
