@@ -40,9 +40,13 @@ app.use('/api/v1/favorite', favoriteController);
 app.use('/auth', authController);
 app.use('/api/v1/park', parkController);
 
-// app.get('/', async (req.res) => {
-// 	res.send("Hi")
-// }
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 
 app.listen(process.env.PORT, () => {

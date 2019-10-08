@@ -157,7 +157,6 @@ router.post('/register', async (req, res) => {
 
 	//encrypt our password
 	const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-	console.log(hashedPassword)
 
 	req.body.password = hashedPassword;
 
