@@ -14,7 +14,13 @@ app.use(session({
 	saveUninitialized: false
 }));
 
-
+app.use(function (req, res, next) {
+	console.log(req.session)
+    res.locals.currentUser = req.sessionStore.sessions.userId;
+    currentSessionUser = res.locals.currentUser;
+    console.log(currentSessionUser)
+    next();
+});
 
 
 //SET UP CORS AS MIDDLEWARE, so any client can make a request to our server
@@ -40,13 +46,6 @@ app.use('/api/v1/favorite', favoriteController);
 app.use('/auth', authController);
 app.use('/api/v1/park', parkController);
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build/index.html'), (err) => {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
 
 
 app.listen(process.env.PORT, () => {
