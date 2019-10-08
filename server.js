@@ -38,9 +38,9 @@ app.use('/api/v1/favorite', favoriteController);
 app.use('/auth', authController);
 app.use('/api/v1/park', parkController);
 
+const port = process.env.port || 9000;
 
-
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
 	console.log('listening on port 9000');
 });
 
